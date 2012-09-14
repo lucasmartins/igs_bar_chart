@@ -22,7 +22,7 @@ rescue NameError
 end
 
 require 'erb'
-require 'igs_pie_chart/pie_chart'
+require 'igs_bar_chart/bar_chart'
 
 unless "".respond_to? 'camelize'
   class String

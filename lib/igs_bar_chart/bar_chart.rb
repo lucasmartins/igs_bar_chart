@@ -28,7 +28,7 @@ class Igs::BarChart
     rendering+= self.style
     rendering+= "</style>\n"
     rendering+= self.script
-    rendering+= self.labels
+    #rendering+= self.labels
     
     return rendering
   end
