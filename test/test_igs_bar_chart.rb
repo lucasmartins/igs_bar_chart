@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'igs_pie_chart'
+require 'igs_bar_chart'
 require 'erb'
 
 class IgsBarChartTest < Test::Unit::TestCase
@@ -14,8 +14,8 @@ class IgsBarChartTest < Test::Unit::TestCase
     puts "Purging #{JS_TEST_OUTPUT}..."+`rm #{JS_TEST_OUTPUT}`
     
     #these two lines does the trick!
-    pie = PieChart.new('My colorful chart',200,0.4,'body',{'one'=>1.1,'two'=>2.2,'tree'=>3.3,'five'=>5.5,'eight'=>8.8,'thirteen'=>13.13,'twenty_one'=>21.21,'thirty_four'=>34.34,'fifty_five'=>55.55,'eighty_nine'=>89.89,'a_hundread_forty_four'=>144.144})
-    @render = pie.render
+    bar = BarChart.new('My colorful chart',500,600,'body',{'one'=>1.1,'two'=>2.2,'tree'=>3.3,'five'=>5.5,'eight'=>8.8,'thirteen'=>13.13,'twenty_one'=>21.21,'thirty_four'=>34.34,'fifty_five'=>55.55,'eighty_nine'=>89.89,'a_hundread_forty_four'=>144.144})
+    @render = bar.render
 
     assert_not_equal nil, @render
 
@@ -23,7 +23,7 @@ class IgsBarChartTest < Test::Unit::TestCase
       f.write @render
     end
 
-    path = File.expand_path("../../templates/test_pie_chart.html.erb", __FILE__)  
+    path = File.expand_path("../../templates/test_bar_chart.html.erb", __FILE__)  
     html_render = ERB.new(File.read(path)).result(binding)
 
     File.open(HTML_TEST_OUTPUT, 'w') do |f|  

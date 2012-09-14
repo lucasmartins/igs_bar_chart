@@ -1,10 +1,10 @@
 class Igs::BarChart
-  attr_reader :title,:size,:endomargin,:target_element,:data
+  attr_reader :title,:size,:target_element,:data
   # data=[100,299,234,55]
-  def initialize(title,size,endomargin=0,target_element='body',data)
+  def initialize(title,width,height,target_element='body',data)
     @title = title
-    @size = size
-    @endomargin = endomargin
+    @width = width
+    @height = height
     @data = data.values
     @labels = data.keys
     @target_element = target_element
@@ -72,20 +72,14 @@ private
 
     @default_attribution=true
     #Default value attribution
-    dsize = 300
-    @width = dsize if @width == nil
-    @height = dsize if @height == nil
-    @endomargin = 0 if @endomargin == nil
-    @width = @height = @size if @size!=nil
+    @width = 500 if @width == nil
+    @height = 100 if @height == nil
+    #@width = @height = @size if @size!=nil
     
     if @data==nil
       @data=[1,1,1]
     end
 
-    if @endomargin >= 1
-      @endomargin = 0
-      STDERR.puts "@endomargin must be less than 1"
-    end
   end
 
 end

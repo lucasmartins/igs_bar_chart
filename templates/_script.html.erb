@@ -1,40 +1,59 @@
 <script type="text/javascript">
-
-  var width = <%=@width%>,height = <%=@height%>,
-  outerRadius = Math.min(width, height) / 2,
-  innerRadius = outerRadius * <%= @endomargin%>,
-  data = <%=@data%>,
-  color = d3.scale.category20(),
-  donut = d3.layout.pie(),
-  arc = d3.svg.arc().innerRadius(innerRadius).outerRadius(outerRadius);
-
-var vis = d3.select("<%=@target_element%>")
-.append("svg")
-  .data([data])
-  .attr("width", width)
-  .attr("height", height);
-
-var arcs = vis.selectAll("g.arc")
-  .data(donut)
-.enter().append("g")
-  .attr("class", "arc")
-  /*.attr("onmouseover","evt.target.setAttribute('opacity', '0.5');")
-  .attr("onmouseout","evt.target.setAttribute('opacity', '1');")*/
-  .attr("onmouseover","evt.target.setAttribute('opacity', '0.5');")
-  .attr("onmouseout","evt.target.setAttribute('opacity', '1');")
-  .attr("transform", "translate(" + outerRadius + "," + outerRadius + ")");
-
-arcs.append("path")
-  .attr("fill", function(d, i) { return color(i); })
-  .attr("d", arc);
-
-arcs.append("text")
-  .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-  .attr("dy", ".35em")
-  .attr("class", "pie-chart-text-label")
-  .attr("text-anchor", "middle")
-  .attr("style", "stroke-opacity:0.0;fill:#FFFFFF;font-weight:600;")
-  .attr("display", function(d) { return d.value > 20 ? null : "none"; })
-  .text(function(d, i) { return d.value.toFixed(1); });
+  function colorfy (number) {
+    number=number*10
+    while(number>255){
+      number=number/1.1
+    }
+    number=parseInt(number);
+    return number;
+  }
+  //Width and height
+  var w = <%=@width%>;
+  var h = <%=@height%>;
+  var barPadding = 2;
   
-  </script>
+  var dataset = <%=@data%>;
+  
+  //Create SVG element
+  var svg = d3.select("<%=@target_element%>")
+        .append("svg")
+        .attr("width", w)
+        .attr("height", h);
+
+  svg.selectAll("rect")
+     .data(dataset)
+     .enter()
+     .append("rect")
+     .attr("x", function(d, i) {
+        return i * (w / dataset.length);
+     })
+     .attr("y", function(d) {
+        return h - (d * 4);
+     })
+     .attr("width", w / dataset.length - barPadding)
+     .attr("height", function(d) {
+        return d * 4;
+     })
+     .attr("fill", function(d) {
+      return "rgb(0, 0, " + colorfy(d) + ")";
+     });
+
+  svg.selectAll("text")
+     .data(dataset)
+     .enter()
+     .append("text")
+     .text(function(d) {
+        return d;
+     })
+     .attr("text-anchor", "middle")
+     .attr("x", function(d, i) {
+        return i * (w / dataset.length) + (w / dataset.length - barPadding) / 2;
+     })
+     .attr("y", function(d) {
+        return h - (d * 4) + 14;
+     })
+     .attr("font-family", "sans-serif")
+     .attr("font-size", "11px")
+     .attr("fill", "white");
+
+</script>
