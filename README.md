@@ -98,4 +98,4 @@ fix/feature has a high chance of being included, please post a new [GitHub Issue
 License
 -------
 
-IGS Bar Chart is free software under the [MIT license](http://lucasmartins.mit-license.org).
+IGS Bar Chart is free software under the [MIT license](http://lucasmartins.mit-license.org) .
