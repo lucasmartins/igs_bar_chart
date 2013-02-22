@@ -52,7 +52,7 @@ Usage (Rails)
 Add D3 to your Rails javascript manifest (application.js):
 
 ```javascript
-//= require d3.v2
+//= require d3
 ```
 
 Make your pie (controller):
@@ -95,16 +95,7 @@ This gem is in a very early stage.
 If you'd like to contribute a feature or bugfix: Thanks! To make sure your
 fix/feature has a high chance of being included, please post a new [GitHub Issue](http://github.com/lucasmartins/igs_bar_chart/issues)
 
-Credits
--------
-
-![Innovit](http://innovit.com.br/logos_innovit/logo-curvas_180.png)
-
-IGS Bar Chart is maintained and funded by [Innovit LTDA](http://innovit.com.br)
-
-The names and logos for Innovit are trademarks of Innovit LTDA.
-
 License
 -------
 
-IGS Bar Chart is free software under the [MIT license](https://github.com/lucasmartins/igs_bar_chart/blob/master/LICENSE).
+IGS Bar Chart is free software under the [MIT license](http://lucasmartins.mit-license.org).
